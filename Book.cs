@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace LibraryCardCatalog
-{
+{   
     class Book
     {
         public string Title { get; set; }
