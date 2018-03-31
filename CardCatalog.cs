@@ -70,22 +70,18 @@ namespace LibraryCardCatalog
             Console.Write("Enter the genre: ");
             string genre = Console.ReadLine();
 
-            //testing below if the ISBN is actually input as a number, and also if it is 13 digits long
             long isbn;
             string isbnInput;
+            //testing below if the ISBN is actually input as a number, and also if it is 13 digits long
             do
             {
-                Console.Write("Enter the ISBN: ");
-                isbnInput = Console.ReadLine();
-
+                do
+                {
+                    Console.Write("Enter the 13 digit ISBN: ");
+                    isbnInput = Console.ReadLine();
+                } while (isbnInput.Length!= 13);
             } while (!long.TryParse(isbnInput, out isbn));
 
-            while (isbn.ToString().Length != 13)
-            {
-                Console.Write("Try again, ISBN needs to be 13 digits: ");
-                isbn = Convert.ToInt64(Console.ReadLine());
-            }
-           
             bookList.Add(new Book(title, author, genre, isbn));
             Console.WriteLine("Make sure to save or this book won't be added!");
         }
@@ -103,6 +99,7 @@ namespace LibraryCardCatalog
                     stream.Close();
                 }
             }
+            //Catch exception when list is attempted to be pulled with nothing in the list
             catch (IOException)
             {
                 Console.WriteLine("You have no books, go add some!");
