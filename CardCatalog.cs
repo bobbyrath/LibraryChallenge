@@ -97,6 +97,12 @@ namespace LibraryCardCatalog
                     BinaryFormatter bf = new BinaryFormatter();
                     bookList = (List<Book>)bf.Deserialize(stream);
                     stream.Close();
+
+                    foreach (Book book in bookList)
+                    {
+                        Console.WriteLine("Title: {0}, Author: {1}, Genre: {2}, ISBN: {3}",
+                            book.Title, book.Author, book.Genre, book.ISBN);
+                    }
                 }
             }
             //Catch exception when list is attempted to be pulled with nothing in the list
@@ -104,12 +110,6 @@ namespace LibraryCardCatalog
             {
                 Console.WriteLine("You have no books, go add some!");
                 Console.WriteLine();
-            }
-           
-            foreach (Book book in bookList)
-            {
-                Console.WriteLine("Title: {0}, Author: {1}, Genre: {2}, ISBN: {3}",
-                    book.Title, book.Author, book.Genre, book.ISBN);
             }
         }
         public static void Save()
