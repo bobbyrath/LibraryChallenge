@@ -6,58 +6,18 @@ using System.Linq;
 
 namespace LibraryCardCatalog
 {
-    class CardCatalog
+    public class CardCatalog
     {
-        private static string FileName { get; set; }
-        private static List<Book> bookList { get; set; }
-
-        public static void GetFile()
-        {
-            Console.WriteLine("Enter a file: ");
-            FileName = Console.ReadLine();
+        public CardCatalog(string fileName){
+            FileName = fileName;
             bookList = new List<Book>();
         }
 
-        public static void DisplayMenu()
-        {
-            bool displayMenu = true;
-            while (displayMenu)
-            {
-                displayMenu = MainMenu();
-                Console.WriteLine();
-            }
-        }
+        private string FileName { get; set; }
+        private List<Book> bookList { get; set; }
 
-        public static bool MainMenu()
-        {
-            
-            Console.WriteLine("1) List all books.");
-            Console.WriteLine("2) Add a book.");
-            Console.WriteLine("3) Save and Exit.");
-            string result = Console.ReadLine();
 
-            if (result == "1")
-            {
-                ListAllBooks();
-                return true;
-            }
-            else if (result == "2")
-            {
-                AddABook();
-                return true;
-            }
-            else if (result == "3")
-            {
-                Save();
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        public static void AddABook()
+        public void AddABook()
         {
             Console.WriteLine("Add a book");
 
@@ -86,7 +46,7 @@ namespace LibraryCardCatalog
             Console.WriteLine("Make sure to save or this book won't be added!");
         }
 
-        public static void ListAllBooks()
+        public void ListAllBooks()
         {
             try
             {
@@ -112,7 +72,7 @@ namespace LibraryCardCatalog
                 Console.WriteLine();
             }
         }
-        public static void Save()
+        public void Save()
         {
             Stream stream = File.Open(FileName, FileMode.Create);
             BinaryFormatter bf = new BinaryFormatter();
